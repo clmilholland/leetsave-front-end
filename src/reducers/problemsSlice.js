@@ -1,8 +1,8 @@
-import { createAsyncthunk, createSlice } from "@reduxjs-toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { act } from "react";
 
-export const getAllProblems = createAsyncthunk(
+export const getAllProblems = createAsyncThunk(
     'problems/getAll',
     async ( token, { rejectWithValue }) => {
         try {
@@ -34,7 +34,7 @@ export const getAllProblems = createAsyncthunk(
 //     }
 // )
 
-export const updateProblem = createAsyncthunk(
+export const updateProblem = createAsyncThunk(
     'problems/update',
     async ( problemData, token, { rejectWithValue }) => {
         try {
@@ -51,7 +51,7 @@ export const updateProblem = createAsyncthunk(
     }
 );
 
-export const deleteProblem = createAsyncthunk(
+export const deleteProblem = createAsyncThunk(
     'problems/delete',
     async ( problemId, token, { rejectWithValue }) => {
         try {
@@ -84,46 +84,46 @@ const problemsSlice = createSlice({
     extraReducers: (builder) => {
         builder
             //getAllProblems
-            .addcase(getAllProblems.pending, (state) => {
+            .addCase(getAllProblems.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addcase(getAllProblems.fulfilled, (state, action) => {
+            .addCase(getAllProblems.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = null;
                 state.allProblems = action.payload.data;
             })
-            .addcase(getAllProblems.rejected, (state, action) => {
+            .addCase(getAllProblems.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
 
             //updateProblem
-            .addcase(updateProblem.pending, (state) => {
+            .addCase(updateProblem.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addcase(updateProblem.fulfilled, (state, action) => {
+            .addCase(updateProblem.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = null;
                 state.problem = action.payload.data;
             })
-            .addcase(updateProblem.rejected, (state, action) => {
+            .addCase(updateProblem.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
 
             //deleteProblem
-            .addcase(deleteProblem.pending, (state) => {
+            .addCase(deleteProblem.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addcase(deleteProblem.fulfilled, (state, action) => {
+            .addCase(deleteProblem.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = null;
                 state.problem = action.payload.data;
             })
-            .addcase(deleteProblem.rejected, (state, action) => {
+            .addCase(deleteProblem.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
