@@ -12,6 +12,7 @@ export const getAllProblems = createAsyncThunk(
                     'Authorization': `Bearer ${token}` 
                 }
             });
+            console.log('response', response.data)
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data.message || 'Could not get problems');
@@ -91,7 +92,8 @@ const problemsSlice = createSlice({
             .addCase(getAllProblems.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = null;
-                state.allProblems = action.payload.data;
+                state.allProblems = action.payload;
+                console.log(action.payload)
             })
             .addCase(getAllProblems.rejected, (state, action) => {
                 state.loading = false;
@@ -106,7 +108,7 @@ const problemsSlice = createSlice({
             .addCase(updateProblem.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = null;
-                state.problem = action.payload.data;
+                state.problem = action.payload;
             })
             .addCase(updateProblem.rejected, (state, action) => {
                 state.loading = false;
@@ -121,7 +123,7 @@ const problemsSlice = createSlice({
             .addCase(deleteProblem.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = null;
-                state.problem = action.payload.data;
+                state.problem = action.payload;
             })
             .addCase(deleteProblem.rejected, (state, action) => {
                 state.loading = false;
