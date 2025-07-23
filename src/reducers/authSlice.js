@@ -30,11 +30,30 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         user: null,
-        token: null,
+        token: localStorage.getItem('jwtToken') || null,
+        isAuthenticated: !!localStorage.getItem('jwtToken'),
         loading: false,
         error: null,
     }, 
     reducers: {
+        setToken(state, action) {
+            state.token = action.payload;
+            state.isAuthenticated = !!action.payload;
+            state.error = null;
+            localStorage.setItem('jwtToken', action.payload);
+        },
+        setAuthError(state, action) {
+            state.error = action.payload;
+            state.isAuthenticated = false;
+            state.token = null;
+            localStorage.removeItem('jwtToken');
+        },
+        logout(state) {
+            state.token = null;
+            state.user = null;
+            state.isAuthenticated = false;
+            localStorage.removeItem('jwtToken')
+        },
         resetError: (state) => {
             state.error = null;
         },
@@ -51,6 +70,7 @@ const authSlice = createSlice({
                 state.error = null;
                 state.user = action.payload.user;
                 state.token = action.payload.token;
+                localStorage.setItem('jwtToken', action.payload.token);
             })
             .addCase(register.rejected, (state, action) => {
                 state.loading = false;
@@ -67,6 +87,7 @@ const authSlice = createSlice({
                 state.error = null;
                 state.user = action.payload.user;
                 state.token = action.payload.token;
+                localStorage.setItem('jwtToken', action.payload.token);
             })
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
@@ -76,7 +97,7 @@ const authSlice = createSlice({
     }
 });
 
-export const { resetError } = authSlice.actions;
+export const { resetError, setToken, setAuthError, logout } = authSlice.actions;
 export const selectUser = (state) => state.auth.user;
 export const selectToken = (state) => state.auth.token;
 export const selectError = (state) => state.auth.error;

@@ -23,11 +23,6 @@ export const Home = () => {
         }
     }
 
-    useEffect(() => {
-        if(!token) navigate('/welcome');
-        fetchAllProblems();
-    }, [])
-
     const displayProblems = () => {
         return allProblems.map((problem) => (
             <ProblemCard problem={problem} key={problem.id} />
