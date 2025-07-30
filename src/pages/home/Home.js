@@ -9,6 +9,7 @@ import {
 } from "../../reducers/problemsSlice";
 import { selectToken } from "../../reducers/authSlice";
 import styles from "./Home.module.css";
+import { ProblemCard } from "../problemcard/ProblemCard";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,11 @@ export const Home = () => {
     dispatch(deleteProblem({ problemId, token }));
   };
 
+  const handleClick = (problem) => {
+    console.log(problem)
+    navigate(`/problems/${problem.problemId}`)
+  }
+
   return (
     <div className={styles.container}>
       <h1 className={styles.pageTitle}>Saved Problems</h1>
@@ -35,7 +41,7 @@ export const Home = () => {
             <div key={problem.id} className={styles.cardWrapper}>
               <div
                 className={styles.card}
-                onClick={() => navigate(`/problems/${problem.id}`)}
+                onClick={() => navigate(`/problems/${problem.problemId}`)}
               >
                 <div className={styles.header}>
                   <h3 className={styles.title}>{problem.title}</h3>

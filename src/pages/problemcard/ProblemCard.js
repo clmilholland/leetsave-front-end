@@ -1,7 +1,15 @@
 import React from "react";
 import styles from './ProblemCard.module.css';
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectAllProblems } from "../../reducers/problemsSlice";
 
-export const ProblemCard = ({problem}) => {
+export const ProblemCard = () => {
+    const allProblems = useSelector(selectAllProblems);
+    const {problemId} = useParams();
+    console.log(allProblems)
+    const problem = allProblems.find((problem) => problem.problemId === problemId);
+    console.log(problem)
     return (
         <div className={styles.card}>
             <div className={styles.header}>
