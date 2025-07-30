@@ -1,0 +1,95 @@
+.container {
+  padding: 2rem;
+  background: #0c0c0c;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e0e0e0;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  color: #00ffe1;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.title {
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.difficulty {
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.easy {
+  background: rgba(0, 255, 128, 0.1);
+  border: 1px solid #00ff80;
+  color: #00ff80;
+}
+
+.medium {
+  background: rgba(255, 204, 0, 0.1);
+  border: 1px solid #ffcc00;
+  color: #ffcc00;
+}
+
+.hard {
+  background: rgba(255, 65, 65, 0.1);
+  border: 1px solid #ff4141;
+  color: #ff4141;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  background: rgba(0, 255, 255, 0.08);
+  border: 1px solid #00ffe1;
+  color: #00ffe1;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}

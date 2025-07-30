@@ -10,6 +10,9 @@ export const ProblemCard = ({problem}) => {
                     {problem.difficulty}
                 </span>
             </div>
+            <div>
+                <p>{problem.tags}</p>
+            </div>
 
             <div className={styles.section}>
                 <h3>Description</h3>

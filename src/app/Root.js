@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setToken, setAuthError, logout } from "../reducers/authSlice";
 import { jwtDecode }from 'jwt-decode';
+import Header from "../components/header/Header";
 
 export const Root = () => {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export const Root = () => {
 
     return (
         <>
+            <Header/>
             <main>
                 <Outlet/>
             </main>

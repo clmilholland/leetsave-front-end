@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { act } from "react";
+import { useDispatch } from "react-redux";
+const dispatch = useDispatch;
 
 export const getAllProblems = createAsyncThunk(
     'problems/getAll',
@@ -12,7 +14,7 @@ export const getAllProblems = createAsyncThunk(
                     'Authorization': `Bearer ${token}` 
                 }
             });
-            console.log('response', response.data)
+            // console.log('response', response.data)
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data.message || 'Could not get problems');
@@ -54,8 +56,9 @@ export const updateProblem = createAsyncThunk(
 
 export const deleteProblem = createAsyncThunk(
     'problems/delete',
-    async ( problemId, token, { rejectWithValue }) => {
+    async ({problemId, token}, { rejectWithValue }) => {
         try {
+            console.log(problemId)
             const response = await axios.delete(`http://localhost:5000/api/problems/${problemId}`, {
                 headers : {
                     'Content-Type': 'application/json',
@@ -64,6 +67,7 @@ export const deleteProblem = createAsyncThunk(
             })
             return response.data;
         } catch (error) {
+
             return rejectWithValue(error.response.data.message || 'Could not delete problem');
         }
     }
@@ -93,7 +97,6 @@ const problemsSlice = createSlice({
                 state.loading = false;
                 state.error = null;
                 state.allProblems = action.payload;
-                console.log(action.payload)
             })
             .addCase(getAllProblems.rejected, (state, action) => {
                 state.loading = false;
@@ -109,6 +112,7 @@ const problemsSlice = createSlice({
                 state.loading = false;
                 state.error = null;
                 state.problem = action.payload;
+                dispatch(getAllProblems(localStorage.getItem('jwtToken')))
             })
             .addCase(updateProblem.rejected, (state, action) => {
                 state.loading = false;
@@ -123,7 +127,8 @@ const problemsSlice = createSlice({
             .addCase(deleteProblem.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = null;
-                state.problem = action.payload;
+                state.problem = action.payload.problem;
+                state.allProblems = state.allProblems.filter((problem) => problem.problemId !== action.payload.problem.problemId)
             })
             .addCase(deleteProblem.rejected, (state, action) => {
                 state.loading = false;
