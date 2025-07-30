@@ -1,133 +1,68 @@
 .container {
-  padding: 2rem;
-  background: #0d0d0d;
-  min-height: 100vh;
-  color: #e0e0e0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.pageTitle {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #00ffe1;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-}
-
-.cardWrapper {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: space-between;
-  max-height: 400px;
-  max-width: 400px;
-  background: #141414;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.05);
-}
-
-.card {
-  padding: 1.5rem;
-  flex: 1;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 14px rgba(0, 255, 255, 0.15);
+  align-items: center;
+  padding: 4rem 2rem;
+  background-color: #0e0e10;
+  color: #f1f1f1;
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
 }
 
 .title {
-  font-size: 1.2rem;
-  color: #ffffff;
+  font-size: 3rem;
+  margin: 0;
+  color: #80f1ff;
+  letter-spacing: 1px;
 }
 
-.description {
-  margin: 0.75rem 0;
+.subtitle {
   color: #ccc;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  height: 60px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 1.2rem;
 }
 
-.difficulty {
-  font-size: 0.75rem;
-  padding: 0.3rem 0.6rem;
+.about, .contact {
+  max-width: 600px;
+  margin-bottom: 3rem;
+  text-align: center;
+  background: #1a1a1d;
+  padding: 2rem;
   border-radius: 12px;
-  text-transform: uppercase;
-  font-weight: bold;
+  box-shadow: 0 0 10px rgba(128, 241, 255, 0.3);
 }
 
-.easy {
-  background: rgba(0, 255, 128, 0.1);
-  color: #00ff80;
-  border: 1px solid #00ff80;
+.about h2, .contact h2 {
+  color: #80f1ff;
+  margin-bottom: 1rem;
 }
 
-.medium {
-  background: rgba(255, 204, 0, 0.1);
-  color: #ffcc00;
-  border: 1px solid #ffcc00;
+.about p, .contact ul {
+  color: #ddd;
+  font-size: 1rem;
 }
 
-.hard {
-  background: rgba(255, 65, 65, 0.1);
-  color: #ff4141;
-  border: 1px solid #ff4141;
+.contact ul {
+  list-style: none;
+  padding: 0;
 }
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 1rem;
+.contact a {
+  color: #80f1ff;
+  text-decoration: none;
 }
 
-.tag {
-  font-size: 0.7rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 8px;
-  background: rgba(0, 255, 255, 0.08);
-  color: #00ffe1;
-  border: 1px solid #00ffe1;
+.contact a:hover {
+  text-decoration: underline;
 }
 
-.buttonGroup {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75rem 1rem;
-  background: #111;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.actionButton {
-  flex: 1;
-  margin: 0 0.25rem;
-  padding: 0.4rem;
-  font-size: 0.85rem;
-  background: transparent;
-  color: #00ffe1;
-  border: 1px solid #00ffe1;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.actionButton:hover {
-  background: rgba(0, 255, 255, 0.1);
-}
