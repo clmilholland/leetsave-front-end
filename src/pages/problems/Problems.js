@@ -6,6 +6,8 @@ import {
   selectError,
   getAllProblems,
   deleteProblem,
+  selectFavorites,
+  addFavorite
 } from "../../reducers/problemsSlice";
 import { selectToken } from "../../reducers/authSlice";
 import styles from "./Problems.module.css";
@@ -17,6 +19,7 @@ export const Problems = () => {
   const allProblems = useSelector(selectAllProblems);
   const error = useSelector(selectError);
   const token = useSelector(selectToken);
+  console.log(error)
 
   useEffect(() => {
     dispatch(getAllProblems(token));
@@ -67,7 +70,7 @@ export const Problems = () => {
                 >
                   Delete
                 </button>
-                <button className={styles.actionButton}>Favorite</button>
+                <button className={styles.actionButton} onClick={() => dispatch(addFavorite({problem, token}))} >Favorite</button>
               </div>
             </div>
           ))

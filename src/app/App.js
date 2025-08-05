@@ -7,6 +7,7 @@ import { Login } from '../pages/login/Login';
 import { Register } from '../pages/register/Register';
 import { ProblemCard } from '../pages/problemcard/ProblemCard';
 import { Problems } from '../pages/problems/Problems';
+import { Favorites } from '../pages/favorites/Favorites';
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<Root/>}>
@@ -16,6 +17,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/register' element={<Register/>} />
     <Route path='/problems' element={<Problems/>} />
     <Route path='/problems/:problemId' element={<ProblemCard/>} />
+    <Route path='/problems/favorites' element={<Favorites/>} />
   </Route>
 ))
 

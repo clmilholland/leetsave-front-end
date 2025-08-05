@@ -22,21 +22,6 @@ export const getAllProblems = createAsyncThunk(
     }
 );
 
-// export const createProblem = createAsyncthunk(
-//     'problems/create',
-//     async ( problemData, token, { rejectWithValue }) => {
-//         try {
-//             const response = await axios.post('http://localhost:5000/api/problems/create', {
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                     'Authorization': `Bearer ${token}`
-//                 },
-//                 body: JSON.stringify()
-//             })
-//         }
-//     }
-// )
-
 export const updateProblem = createAsyncThunk(
     'problems/update',
     async ( problemData, token, { rejectWithValue }) => {
@@ -73,10 +58,49 @@ export const deleteProblem = createAsyncThunk(
     }
 );
 
+export const addFavorite = createAsyncThunk(
+    'favorites/add',
+    async({problem, token}, {rejectWithValue }) => {
+        try {
+            const response = await axios.post(`http://localhost:5000/api/problems/favorites`,
+                problem,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            )
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data || 'Could not add to favorites');
+        }
+    }
+);
+
+
+export const getFavorites = createAsyncThunk(
+    'favorites/getAll',
+    async( token, { rejectWithValue }) => {
+        try {
+            const response = await axios.get(`http://localhost:5000/api/problems/favorites`, {
+                    headers : {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+            });
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data || 'Could not get favorites');
+        }
+    }
+)
+
 const problemsSlice = createSlice({
     name: 'problems',
     initialState: {
         allProblems: null,
+        favorites: [],
         problem: null,
         loading: false,
         error: null
@@ -84,7 +108,7 @@ const problemsSlice = createSlice({
     reducers: {
         resetError: (state) => {
             state.error = null;
-        },
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -134,9 +158,40 @@ const problemsSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
+
+            //addFavorite
+            .addCase(addFavorite.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(addFavorite.fulfilled, (state, action) => {
+                state.loading = false;
+                state.error = null;
+                state.favorites = state.favorites.push(action.payload)
+            })
+            .addCase(addFavorite.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+
+            //getFavorites
+            .addCase(getFavorites.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getFavorites.fulfilled, (state, action) => {
+                state.loading = false;
+                state.error = null;
+                state.favorites = action.payload;
+            })
+            .addCase(getFavorites.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
     }
 });
 
+export const selectFavorites = (state) => state.problems.favorites;
 export const selectAllProblems = (state) => state.problems.allProblems;
 export const selectProblem = (state) => state.problems.problem;
 export const selectLoading = (state) => state.problems.loading;
