@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { act } from "react";
 import { useDispatch } from "react-redux";
-const dispatch = useDispatch;
+
 
 export const getAllProblems = createAsyncThunk(
     'problems/getAll',
@@ -41,7 +41,7 @@ export const updateProblem = createAsyncThunk(
 
 export const deleteProblem = createAsyncThunk(
     'problems/delete',
-    async ({problemId, token}, { rejectWithValue }) => {
+    async ({problemId, token}, { rejectWithValue, dispatch }) => {
         try {
             console.log(problemId)
             const response = await axios.delete(`http://localhost:5000/api/problems/${problemId}`, {
@@ -50,6 +50,7 @@ export const deleteProblem = createAsyncThunk(
                     'Authorization': `Bearer ${token}`
                 }
             })
+            await dispatch(deleteFavorite({problemId, token}))
             return response.data;
         } catch (error) {
 
@@ -96,6 +97,24 @@ export const getFavorites = createAsyncThunk(
     }
 )
 
+export const deleteFavorite = createAsyncThunk(
+    'favorites/delete',
+    async({ problemId, token}, {rejectWithValue}) => {
+        console.log('called from other thunk')
+        try {
+            const response = await axios.delete(`http://localhost:5000/api/problems/favorites/${problemId}`, {
+                    headers : {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+            })
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data || 'Could not delete favorite');
+        }
+    }
+)
+
 const problemsSlice = createSlice({
     name: 'problems',
     initialState: {
@@ -136,7 +155,7 @@ const problemsSlice = createSlice({
                 state.loading = false;
                 state.error = null;
                 state.problem = action.payload;
-                dispatch(getAllProblems(localStorage.getItem('jwtToken')))
+            
             })
             .addCase(updateProblem.rejected, (state, action) => {
                 state.loading = false;
@@ -149,10 +168,13 @@ const problemsSlice = createSlice({
                 state.error = null;
             })
             .addCase(deleteProblem.fulfilled, (state, action) => {
+                const {problemId} = action.payload.problem;
+                const token = localStorage.getItem('jwtToken')
                 state.loading = false;
                 state.error = null;
                 state.problem = action.payload.problem;
                 state.allProblems = state.allProblems.filter((problem) => problem.problemId !== action.payload.problem.problemId)
+                
             })
             .addCase(deleteProblem.rejected, (state, action) => {
                 state.loading = false;
@@ -167,7 +189,7 @@ const problemsSlice = createSlice({
             .addCase(addFavorite.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = null;
-                state.favorites = state.favorites.push(action.payload)
+                // dispatch(getFavorites(localStorage.getItem('jwtToken')))
             })
             .addCase(addFavorite.rejected, (state, action) => {
                 state.loading = false;
@@ -185,6 +207,21 @@ const problemsSlice = createSlice({
                 state.favorites = action.payload;
             })
             .addCase(getFavorites.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+
+            //delete favorite
+            .addCase(deleteFavorite.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(deleteFavorite.fulfilled, (state, action) => {
+                state.loading = false;
+                state.error = null;
+                state.favorites = action.payload.userFavorites;
+            })
+            .addCase(deleteFavorite.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

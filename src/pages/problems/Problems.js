@@ -66,7 +66,7 @@ export const Problems = () => {
               <div className={styles.buttonGroup}>
                 <button
                   className={styles.actionButton}
-                  onClick={() => handleDelete(problem.id)}
+                  onClick={() => handleDelete(problem.problemId)}
                 >
                   Delete
                 </button>

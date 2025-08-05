@@ -1,5 +1,5 @@
 import React from "react";
-import { selectFavorites, getFavorites, selectError } from "../../reducers/problemsSlice";
+import { selectFavorites, getFavorites, selectError, deleteFavorite } from "../../reducers/problemsSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -17,7 +17,12 @@ export const Favorites = () => {
 
     useEffect(() => {
         dispatch(getFavorites(token))
-    },[])
+    },[dispatch, token]);
+
+    const handleDelete = (problemId) => {
+        dispatch(deleteFavorite({ problemId, token }));
+    }
+
     return (
         <div className={styles.container}>
           <h1 className={styles.pageTitle}>Favorite Problems</h1>
@@ -25,7 +30,7 @@ export const Favorites = () => {
           <div className={styles.grid}>
             {favorites ? (
               favorites.map((problem) => (
-                <div key={problem.id} className={styles.cardWrapper}>
+                <div key={problem.problemId} className={styles.cardWrapper}>
                   <div
                     className={styles.card}
                     onClick={() => navigate(`/problems/${problem.problemId}`)}
@@ -50,7 +55,7 @@ export const Favorites = () => {
                   <div className={styles.buttonGroup}>
                     <button
                       className={styles.actionButton}
-                    
+                      onClick={() => handleDelete(problem.problemId)}
                     >
                       Remove from Favorites
                     </button>
