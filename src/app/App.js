@@ -8,12 +8,14 @@ import { Register } from '../pages/register/Register';
 import { ProblemCard } from '../pages/problemcard/ProblemCard';
 import { Problems } from '../pages/problems/Problems';
 import { Favorites } from '../pages/favorites/Favorites';
+import { Profile } from '../pages/profile/Profile';
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<Root/>}>
     <Route index element={<Home/>} />
     <Route path='/welcome' element={<Welcome/>} />
     <Route path='/login' element={<Login/>} />
+    <Route path='/profile' element={<Profile/>} />
     <Route path='/register' element={<Register/>} />
     <Route path='/problems' element={<Problems/>} />
     <Route path='/problems/:problemId' element={<ProblemCard/>} />

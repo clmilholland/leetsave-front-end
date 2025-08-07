@@ -26,6 +26,23 @@ export const login = createAsyncThunk(
     }
 );
 
+export const getAccountDetails = createAsyncThunk(
+    'users/account',
+    async(token, {rejectWithValue}) => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/users/profile', {
+                headers : {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+            })
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response.data.message || 'Could not get profile data');
+        }
+    }
+)
+
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
@@ -90,6 +107,22 @@ const authSlice = createSlice({
                 localStorage.setItem('jwtToken', action.payload.token);
             })
             .addCase(login.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+                console.log(state.error)
+            })
+
+            //account
+            .addCase(getAccountDetails.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getAccountDetails.fulfilled, (state, action) => {
+                state.loading = false;
+                state.error = null;
+                state.user = action.payload.user;
+            })
+            .addCase(getAccountDetails.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
                 console.log(state.error)

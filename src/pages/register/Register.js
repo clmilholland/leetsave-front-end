@@ -11,7 +11,9 @@ export const Register = () => {
     const [ formData, setFormData ] = useState({
         username: '',
         email: '',
-        password: ''
+        password: '',
+        firstName: '',
+        lastName: ''
     });
 
     const handleChange = (e) => {
@@ -35,6 +37,24 @@ export const Register = () => {
         <div className={styles.container}>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <h2 className={styles.title}>Create an account</h2>
+                <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    placeholder="First name"
+                    className={styles.input}
+                    required
+                />
+                <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    placeholder="Last name"
+                    className={styles.input}
+                    required
+                />
                 <input
                     type="text"
                     name="username"

@@ -1,0 +1,248 @@
+:root {
+  --bg: #0d0d0d;
+  --panel: #1a1a1a;
+  --border: #333;
+  --text-primary: #fff;
+  --text-secondary: #aaa;
+  --button-bg: #111;
+  --button-hover: #222;
+  --accent-red: #c62828;
+}
+
+.wrapper {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-family: 'Inter';
+  padding: 2rem;
+}
+
+.container {
+  display: flex;
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  gap: 30%;
+}
+
+/* Sidebar */
+
+.sidebar {
+  /* flex: 0 0 260px; */
+}
+
+.sidebarHeader {
+  margin-bottom: 4rem;
+  margin-left: 16px;
+}
+
+.welcome {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.manage {
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.itemContainer {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+}
+
+.navItem {
+  /* color: var(--text-secondary); */
+  font-size: 1.25rem;
+  padding: 0.3rem 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.navItem:hover {
+  color: var(--text-primary);
+}
+
+.icon {
+    height: fit-content;
+    position: relative;
+    top: 2px;
+    padding-right: 10px;
+}
+
+.activeContainer {
+    color:  var(--text-primary);
+}
+
+.activeContainer .dot {
+    background-color: #fff;
+    position: relative;
+    width: 6px;
+    height: 6px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.inactiveContainer .dot {
+    background-color: transparent;
+    position: relative;
+    width: 6px;
+    height: 6px;
+    margin-right: 10px;
+}
+
+/* .active::before {
+    content: '•';
+    color: #fff;
+    width: 4px;
+} */
+
+/* Main Content */
+
+.main {
+  flex: 1;
+  position: relative;
+  max-width: 600px;
+}
+
+.profileIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #ccc;
+}
+
+.sectionHeader h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.sectionHeader p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 0.3rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Account Details */
+
+.detailCard {
+  background-color: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.detailRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.label {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.value {
+  flex: 2;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.button {
+  background-color: var(--button-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background-color: var(--button-hover);
+  color: var(--text-primary);
+}
+
+/* Logout */
+
+.logoutContainer {
+  margin-top: 2rem;
+  text-align: right;
+  display: flex;
+  justify-content: center;
+}
+
+.logoutButton {
+  background-color: var(--accent-red);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: #b71c1c;
+}
+
+/* Account Security */
+.securityCard {
+    border-top: 1px solid var(--border);
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+.securityCard .label {
+    color: var(--text-primary);
+}
+
+.securityCard .value {
+    color: var(--text-secondary)
+}
+
+/* Account Data */
+.deleteCard {
+    border-top: 1px solid var(--border);
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.deleteCard .label {
+    color: var(--text-primary);
+}
+
+.deleteCard .value {
+    color: var(--text-secondary)
+}
+
+.deleteCard .button {
+    background-color: #8b1a1a;
+}

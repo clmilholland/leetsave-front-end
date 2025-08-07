@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './Header.module.css';
 import { NavLink } from 'react-router-dom';
+import LeetSaveLogo from '../../images/LeetSaveLogo.png'
 
 
 const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logoContainer}>
-        <img  alt="LeetSave Logo" className={styles.logo} />
+        <img src={LeetSaveLogo} alt="LeetSave Logo" className={styles.logo} />
       </div>
       <nav className={styles.nav}>
         <NavLink to="/" className={styles.navItem}>Home</NavLink>
