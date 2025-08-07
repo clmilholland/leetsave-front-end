@@ -1,52 +1,66 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #0e0e0e;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000000;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #1a1a1a;
 }
 
 .logoContainer {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .logo {
-  height: 40px;
-  width: auto;
-  filter: drop-shadow(0 0 8px #00ffe1aa);
+    height: 40px; 
+    width: auto;
 }
 
 .nav {
-  display: flex;
-  gap: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navItemContainer {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
 }
 
 .navItem {
-  color: #e0e0e0;
-  text-decoration: none;
-  font-size: 1rem;
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-.navItem::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background: linear-gradient(90deg, #00ffe1, #00b3ff);
-  transition: width 0.3s ease;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
 }
 
 .navItem:hover {
-  color: #ffffff;
+    color: #fff;
 }
 
-.navItem:hover::after {
-  width: 100%;
+.active {
+  color: #fff;
 }
+
+.inactive {
+  color: #aaa;
+}
+
+/* .active .navItem {
+    color: #fff;
+    position: relative;
+}
+
+.inactive .navItem {
+  color: #aaa
+} */
