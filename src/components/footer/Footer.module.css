@@ -1,0 +1,49 @@
+.homeFooter {
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #cccccc;
+  background-color: transparent;
+  font-family: 'Inter', sans-serif;
+}
+
+.footer {
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #cccccc;
+  background-color: #000000;
+  font-family: 'Inter', sans-serif;
+}
+
+.heading {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+.contactGroup {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.contactItem h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.contactItem a {
+  color: #cccccc;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.contactItem a:hover {
+  border-bottom: 1px solid #ffffff;
+  color: #ffffff;
+}

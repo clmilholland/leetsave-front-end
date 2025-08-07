@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { setToken, setAuthError, logout } from "../reducers/authSlice";
 import { jwtDecode }from 'jwt-decode';
 import Header from "../components/header/Header";
+import { Footer } from "../components/footer/Footer";
 
 export const Root = () => {
     const dispatch = useDispatch();
     const navigate= useNavigate();
     const { isAuthenticated } = useSelector((state) => state.auth);
-
+    
     useEffect(() => {
         const initializeAuth = () => {
             const token = localStorage.getItem('jwtToken');
@@ -40,6 +41,7 @@ export const Root = () => {
             <main>
                 <Outlet/>
             </main>
+            <Footer />
         </>
     )
 };

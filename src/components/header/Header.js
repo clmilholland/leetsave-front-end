@@ -6,12 +6,16 @@ import { FaRegUser, FaRegHeart } from "react-icons/fa";
 import { GoHome, GoCodeReview } from "react-icons/go";
 import { SiBookstack } from "react-icons/si";
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [active, setActive] = useState('Home');
-  console.log(active)
+  const location = useLocation();
+  const isHomepage = location.pathname === '/';
+
+  
   return (
-    <header className={styles.header}>
+    <header className={isHomepage ? styles.homeHeader : styles.header}>
       <NavLink to={"/"} className={styles.logoContainer} >
         <img src={LeetSaveLogo} alt="LeetSave Logo" className={styles.logo} />
       </NavLink>
