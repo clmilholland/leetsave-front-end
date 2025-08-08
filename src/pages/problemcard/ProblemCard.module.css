@@ -1,46 +1,41 @@
-.container {
-  max-width: 1200px;
-  margin: 2rem auto;
+.pageWrapper {
+  background-color: #000;
+  color: #fff;
+  min-height: calc(100vh - 64px); /* adjust if your header is a different height */
   padding: 2rem;
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
-  color: #f0f0f0;
+  box-sizing: border-box;
 }
 
 .top {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  gap: 1rem;
   margin-bottom: 2rem;
 }
 
 .title {
-  flex: 1;
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .difficulty {
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
   font-weight: bold;
-  text-transform: uppercase;
-  width: fit-content;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 1rem;
 }
 
 .difficulty.easy {
-  background-color: #4caf50;
+  background-color: #2ecc71;
+  color: #000;
 }
 
 .difficulty.medium {
-  background-color: #ff9800;
+  background-color: #f1c40f;
+  color: #000;
 }
 
 .difficulty.hard {
-  background-color: #f44336;
+  background-color: #e74c3c;
+  color: #fff;
 }
 
 .tags {
@@ -50,57 +45,39 @@
 }
 
 .tag {
-  background-color: #2c2c2e;
-  color: #80f1ff;
+  background-color: #111;
   padding: 0.3rem 0.6rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
-}
-
-.content {
-  display: flex;
-  gap: 2rem;
-}
-
-.leftPane, .rightPane {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  border: 1px solid #444;
 }
 
 .section {
-  margin-bottom: 1.5rem;
-}
-
-.description, .pseudocode, .code {
-  background-color: #121212;
-  padding: 1rem;
-  border-radius: 8px;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  font-family: 'Courier New', monospace;
-  font-size: 0.95rem;
-  border: 1px solid #333;
+  margin-bottom: 2rem;
 }
 
 .toggleButton {
-  background-color: #262626;
-  color: #80f1ff;
-  border: 1px solid #80f1ff;
+  background-color: transparent;
+  color: #00aaff;
+  border: 1px solid #00aaff;
   padding: 0.5rem 1rem;
+  font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 1rem;
+  transition: background 0.2s ease;
 }
 
 .toggleButton:hover {
-  background-color: #80f1ff33;
+  background-color: #00aaff;
+  color: #000;
 }
 
-.error {
-  color: red;
-  text-align: center;
-  margin-top: 2rem;
+.contentBlock {
+  background-color: #111;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+  white-space: pre-wrap;
+  border: 1px solid #333;
+  font-family: 'Courier New', monospace;
 }
-

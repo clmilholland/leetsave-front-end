@@ -24,14 +24,18 @@ export const getAllProblems = createAsyncThunk(
 
 export const updateProblem = createAsyncThunk(
     'problems/update',
-    async ( problemData, token, { rejectWithValue }) => {
+    async ({problem, token}, { rejectWithValue }) => {
+        // console.log(problem, token)
         try {
-            const response = await axios.put(`http://localhost:5000/api/problems/${problemData.problemId}`, {
-                headers : {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+            const response = await axios.put(`http://localhost:5000/api/problems/${problem.problemId}`,
+                problem, 
+                {
+                    headers : {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
                 }
-            })
+            )
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data.message || 'Could not update problem');
@@ -127,6 +131,13 @@ const problemsSlice = createSlice({
     reducers: {
         resetError: (state) => {
             state.error = null;
+        },
+        toggleIsFavorited: (state, action) => {
+            const problemId = action.payload;
+            const problem = state.allProblems.find((problem) => problem.problemId === problemId);
+            console.log(problem.isFavorited)
+            if(problem) problem.isFavorited = !problem.isFavorited;
+            console.log(problem.isFavorited)
         }
     },
     extraReducers: (builder) => {
@@ -228,6 +239,7 @@ const problemsSlice = createSlice({
     }
 });
 
+export const { toggleIsFavorited } = problemsSlice.actions;
 export const selectFavorites = (state) => state.problems.favorites;
 export const selectAllProblems = (state) => state.problems.allProblems;
 export const selectProblem = (state) => state.problems.problem;
