@@ -1,14 +1,16 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from './Register.module.css';
 import { register, selectError } from "../../reducers/authSlice";
+import { NavLink } from "react-router-dom";
 
 export const Register = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const error = useSelector(selectError);
-    const [ formData, setFormData ] = useState({
+
+    const [formData, setFormData] = useState({
         username: '',
         email: '',
         password: '',
@@ -25,18 +27,18 @@ export const Register = () => {
         e.preventDefault();
         try {
             await dispatch(register(formData)).unwrap();
-            navigate('/')
-        } catch (error) {
-            console.log('login error', error);
+            navigate('/');
+        } catch (err) {
+            console.error('Registration error:', err);
         }
     };
-
-
 
     return (
         <div className={styles.container}>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <h2 className={styles.title}>Create an account</h2>
+                <h2 className={styles.title}>LeetSave</h2>
+                <p className={styles.subtitle}>Sign up to save, create, study, and more</p>
+
                 <input
                     type="text"
                     name="firstName"
@@ -82,9 +84,21 @@ export const Register = () => {
                     className={styles.input}
                     required
                 />
-                <button type="submit" className={styles.button}>Log In</button>
-                {error ? <div>{error}</div> : <></>}
+
+                <p className={styles.terms}>
+                    By signing up, you agree to our 
+                    <a href="/terms" className={styles.link}> Terms</a>, 
+                    <a href="/privacy" className={styles.link}> Privacy Policy</a>, and 
+                    <a href="/cookies" className={styles.link}> Cookies Policy</a>.
+                </p>
+
+                <button type="submit" className={styles.button}>
+                    Sign Up
+                </button>
+                
+                <div className={styles.linkContainer}>Already have an account? <NavLink to='/login' className={styles.link}>Log in</NavLink></div>
+                {error && <div className={styles.error}>{error}</div>}
             </form>
         </div>
-    )
-}
+    );
+};

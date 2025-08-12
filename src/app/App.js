@@ -9,17 +9,20 @@ import { ProblemCard } from '../pages/problemcard/ProblemCard';
 import { Problems } from '../pages/problems/Problems';
 import { Favorites } from '../pages/favorites/Favorites';
 import { Profile } from '../pages/profile/Profile';
+import { Study } from '../pages/study/Study';
+import { RequireAuth } from '../components/requireAuth/RequireAuth';
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<Root/>}>
     <Route index element={<Home/>} />
     <Route path='/welcome' element={<Welcome/>} />
     <Route path='/login' element={<Login/>} />
-    <Route path='/profile' element={<Profile/>} />
     <Route path='/register' element={<Register/>} />
+    <Route path='/profile' element={<Profile/>} />
     <Route path='/problems' element={<Problems/>} />
     <Route path='/problems/:problemId' element={<ProblemCard/>} />
     <Route path='/problems/favorites' element={<Favorites/>} />
+    <Route path='/study' element={<Study/>} />
   </Route>
 ))
 

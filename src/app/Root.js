@@ -2,15 +2,16 @@ import React, {useEffect} from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setToken, setAuthError, logout } from "../reducers/authSlice";
+import { setToken, setAuthError, logout, selectIsAuthenticated } from "../reducers/authSlice";
 import { jwtDecode }from 'jwt-decode';
 import Header from "../components/header/Header";
 import { Footer } from "../components/footer/Footer";
+import { Welcome } from "../pages/welcome/Welcome";
 
 export const Root = () => {
     const dispatch = useDispatch();
     const navigate= useNavigate();
-    const { isAuthenticated } = useSelector((state) => state.auth);
+    const isAuthenticated = useSelector(selectIsAuthenticated);
     
     useEffect(() => {
         const initializeAuth = () => {
@@ -20,16 +21,16 @@ export const Root = () => {
                     const decoded = jwtDecode(token);
                     if(decoded.exp * 1000 < Date.now()) {
                         dispatch(logout());
-                        navigate('/welcome');
+                        navigate('/');
                     } else {
                         dispatch(setToken(token));
                     }
                 } catch (error) {
                     dispatch(setAuthError('Invalid token'));
-                    navigate('/welcome');
+                    navigate('/');
                 }
             } else if (!isAuthenticated) {
-                navigate('/welcome')
+                navigate('/')
             }
         }
         initializeAuth();

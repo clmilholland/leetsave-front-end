@@ -1,30 +1,40 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import styles from './Welcome.module.css';
+import { useNavigate } from "react-router-dom";
+import styles from "./Welcome.module.css";
+import LeetSaveLogo from '../../images/LeetSaveLogo.png'
 
-export const Welcome = () => {
-    const navigate = useNavigate();
-    return (
-        <div className={styles.container}>
-            <h1 className={styles.title}>Welcome to LeetSave!</h1>
-            <h3 className={styles.subtitle}>A place to store all of your solved LeetCode problems</h3>
-            <img 
-                className={styles.image} 
-                src="" 
-                alt="LeetSave Banner"
-            />
-            <div className={styles.section}>
-                <h3>Join today</h3>
-                <button className={styles.button} onClick={() => navigate('/register')}>
-                    Create Account
-                </button>
-            </div>
-            <div className={styles.section}>
-                <h4>Already have an account?</h4>
-                <button className={styles.button} onClick={() => navigate('/login')}>
-                    Sign In
-                </button>
-            </div>
+export const Welcome = ({ view }) => {
+  const navigate = useNavigate();
+  return (
+    <div className={styles.container} >
+        <div className={styles.welcomeContainer}>
+            <img src={LeetSaveLogo} alt="LeetSave logo" className={styles.logo}/>
+        <h4 className={styles.title}>
+            Must be signed in to view {view}
+        </h4>
+        <h5 className={styles.subtitle}>
+            Save, Create, Study and more with LeetSave
+        </h5>
+        <div className={styles.buttons}>
+            <button
+            className={styles.primaryButton}
+            onClick={() => navigate("/register")}
+            >
+            Sign up for LeetSave
+            </button>
+            <button
+            className={styles.secondaryButton}
+            onClick={() => navigate("/login")}
+            >
+            Log in
+            </button>
         </div>
-    );
-}
+        <p className={styles.disclaimer}>
+            By continuing, you agree to LeetSave's{" "}
+            <a href="/terms">Terms of Use</a> and{" "}
+            <a href="/privacy">Privacy Policy</a>.
+        </p>
+        </div>
+    </div>
+  );
+};

@@ -105,6 +105,8 @@ const authSlice = createSlice({
                 state.user = action.payload.user;
                 state.token = action.payload.token;
                 localStorage.setItem('jwtToken', action.payload.token);
+                console.log(state.isAuthenticated)
+                state.isAuthenticated = true;
             })
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
@@ -135,4 +137,5 @@ export const selectUser = (state) => state.auth.user;
 export const selectToken = (state) => state.auth.token;
 export const selectError = (state) => state.auth.error;
 export const selectLoading = (state) => state.auth.loading;
+export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
 export default authSlice.reducer;
